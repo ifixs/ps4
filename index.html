@@ -7,24 +7,18 @@
     <style>
         body {
             margin: 0;
-            padding: 0;<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS4 Exploit</title>
-    <style>
-        body {
-            margin: 0;
             padding: 0;
             height: 100vh;
             width: 100vw;
+            /* تشغيل الصورة وعرضها مباشرة بكامل الشاشة */
+            background-image: url('../background.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             overflow: hidden;
             background-color: #121212;
         }
+        /* إخفاء العناصر النصية لتظهر الصورة فقط */
         #result, #user-agent {
             display: none;
         }
@@ -32,6 +26,7 @@
 </head>
 <body>
 
+    <!-- تشغيل الموسيقى في الخلفية فوراً -->
     <audio id="bg-music" src="../music_background.mp3" autoplay loop></audio>
 
     <div id="result"></div>
@@ -39,13 +34,11 @@
 
     <script>
         function processDevice() {
-            // إجبار المتصفح على تشغيل وتحميل الصورة الجديدة فوراً وتخطي الكاش القديم
-            document.body.style.backgroundImage = "url('../background.png?v=' + String(new Date().getTime()))";
-
+            // محاولة تشغيل الموسيقى فوراً وتخطي قيود المتصفح
             const audio = document.getElementById('bg-music');
             if (audio) {
                 audio.play().catch(function(error) {
-                    console.log("Autoplay blocked or required interaction.");
+                    console.log("Autoplay hindered.");
                 });
             }
 
@@ -57,65 +50,7 @@
                 if (fwMatch && fwMatch[1]) {
                     const firmware = parseFloat(fwMatch[1]);
                     
-                    if (firmware >= 5.00 && firmware <= 9.60) {
-                        setTimeout(() => { window.location.href = "505_960/index.html"; }, 30000);
-                    } else if (firmware >= 10.00 && firmware <= 11.02) {
-                        setTimeout(() => { window.location.href = "1000_1102/index.html"; }, 30000);
-                    } else if (firmware >= 11.50 && firmware <= 13.00) {
-                        setTimeout(() => { window.location.href = "1150-1300/index.html"; }, 30000);
-                    }
-                }
-            }
-        }
-        window.onload = processDevice;
-    </script>
-</body>
-</html>
-
-            height: 100vh;
-            width: 100vw;
-            /* عرض الصورة بكامل الشاشة */
-            background-image: url('../background.png'); /* استبدل background.png باسم وصيغة صورتك */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
-            background-color: #121212;
-        }
-        /* إخفاء العناصر النصية لجعل الشاشة صامتة بصرياً وتظهر الصورة فقط */
-        #result, #user-agent {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- تشغيل الموسيقى تلقائياً في الخلفية وبشكل متكرر بدون إظهار أي أزرار -->
-    <audio id="bg-music" src="../music_background.mp3" autoplay loop></audio>
-
-    <!-- العناصر مخفية وتعمل في الخلفية فقط لتوجيه النظام -->
-    <div id="result"></div>
-    <div id="user-agent"></div>
-
-    <script>
-        function processDevice() {
-            // محاولة تشغيل الموسيقى فوراً لضمان تخطي قيود بعض المتصفحات
-            const audio = document.getElementById('bg-music');
-            if (audio) {
-                audio.play().catch(function(error) {
-                    console.log("التشغيل التلقائي بحاجة لتفاعل أو مدعوم افتراضياً في النظام.");
-                });
-            }
-
-            const userAgent = navigator.userAgent;
-            const isPS4 = /PlayStation 4|PS4/i.test(userAgent);
-            
-            if (isPS4) {
-                const fwMatch = userAgent.match(/(?:PlayStation 4|PS4)[\s\/]+([\d\.]+)/i);
-                if (fwMatch && fwMatch[1]) {
-                    const firmware = parseFloat(fwMatch[1]);
-                    
-                    /* تم ضبط التوقيت هنا على 30000 مللي ثانية (أي 30 ثانية تماماً) */
+                    /* تحويل سليم ومؤكد بعد 30 ثانية (30000 مللي ثانية) */
                     if (firmware >= 5.00 && firmware <= 9.60) {
                         setTimeout(() => { window.location.href = "505_960/index.html"; }, 30000);
                     } else if (firmware >= 10.00 && firmware <= 11.02) {
