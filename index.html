@@ -11,45 +11,61 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #121212;
+            /* 1. إضافة صورة الخلفية هنا وتوسيعها لتغطي الشاشة */
+            background-image: url('../background.jpg'); /* استبدل background.jpg باسم وصيغة صورتك */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: #ffffff;
         }
         .card {
-            background-color: #1e1e1e;
+            background-color: rgba(30, 30, 30, 0.85); /* جعل الكارت شفافاً قليلاً ليظهر جمال الخلفية */
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             text-align: center;
             max-width: 450px;
             width: 90%;
+            backdrop-filter: blur(5px); /* إضافة تأثير ضبابي خلف الكارت */
         }
         .status {
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 1rem;
         }
-        .info { color: #0088ff; }
-        .error { color: #ff4d4d; }
+        .info {
+            color: #0088ff;
+        }
+        .error {
+            color: #ff4d4d;
+        }
         .ua-box {
             margin-top: 1.5rem;
             font-size: 0.85rem;
             color: #aaa;
             word-break: break-all;
-            background: #111;
+            background: rgba(17, 17, 17, 0.9);
             padding: 12px;
             border-radius: 6px;
             border: 1px solid #333;
             text-align: left;
         }
+        /* تصميم مشغل الموسيقى ليظهر بشكل أنيق أسفل الكارت */
+        .audio-player {
+            margin-top: 15px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
-<audio src="../music_background.mp3" autoplay loop></audio>
-
+    <!-- 2. تعديل وسم الموسيقى وإضافةcontrols لضمان عمل الصوت في المتصفحات -->
     <div class="card">
         <div id="result" class="status info">Cek firmware...</div>
         <div id="user-agent" class="ua-box"></div>
+        
+        <!-- مشغل الموسيقى -->
+        <audio class="audio-player" src="../music_background.mp3" autoplay loop controls></audio>
     </div>
 
     <script>
@@ -57,37 +73,23 @@
             const userAgent = navigator.userAgent;
             const resultElement = document.getElementById('result');
             const uaElement = document.getElementById('user-agent');
-
             uaElement.innerHTML = "<strong>User-Agent Terdeteksi:</strong><br>" + userAgent;
-
+            
             const isPS4 = /PlayStation 4|PS4/i.test(userAgent);
-
+            
             if (isPS4) {
                 const fwMatch = userAgent.match(/(?:PlayStation 4|PS4)[\s\/]+([\d\.]+)/i);
-
                 if (fwMatch && fwMatch[1]) {
                     const firmware = parseFloat(fwMatch[1]);
                     resultElement.innerText = `Terdeteksi PS4 (FW ${firmware.toFixed(2)})`;
-
+                    
                     if (firmware >= 5.00 && firmware <= 9.60) {
-                        resultElement.innerText += "";
-                        setTimeout(() => {
-                            window.location.href = "505_960/index.html";
-                        }, 1000);
-                    }
-                    else if (firmware >= 10.00 && firmware <= 11.02) {
-                        resultElement.innerText += "";
-                        setTimeout(() => {
-                            window.location.href = "1000_1102/index.html";
-                        }, 1000);
-                    } 
-                    else if (firmware >= 11.50 && firmware <= 13.00) {
-                        resultElement.innerText += "";
-                        setTimeout(() => {
-                            window.location.href = "1150-1300/index.html";
-                        }, 1000);
-                    }
-                    else {
+                        setTimeout(() => { window.location.href = "505_960/index.html"; }, 1000);
+                    } else if (firmware >= 10.00 && firmware <= 11.02) {
+                        setTimeout(() => { window.location.href = "1000_1102/index.html"; }, 1000);
+                    } else if (firmware >= 11.50 && firmware <= 13.00) {
+                        setTimeout(() => { window.location.href = "1150-1300/index.html"; }, 1000);
+                    } else {
                         resultElement.className = "status error";
                         resultElement.innerText = `PS4 FW ${firmware.toFixed(2)} belum support.`;
                     }
@@ -100,9 +102,7 @@
                 resultElement.innerText = "❌ Perangkat ini bukan PlayStation 4.";
             }
         }
-
         window.onload = processDevice;
     </script>
-
 </body>
 </html>
