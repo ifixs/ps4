@@ -10,15 +10,14 @@
             padding: 0;
             height: 100vh;
             width: 100vw;
-            /* تشغيل الصورة وعرضها مباشرة بكامل الشاشة */
-            background-image: url('../background.png'); 
+            /* تم تعديل المسار لتقرأ الصورة من نفس المجلد مباشرة دون أخطاء */
+            background-image: url('background.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             overflow: hidden;
             background-color: #121212;
         }
-        /* إخفاء العناصر النصية لتظهر الصورة فقط */
         #result, #user-agent {
             display: none;
         }
@@ -26,7 +25,6 @@
 </head>
 <body>
 
-    <!-- تشغيل الموسيقى في الخلفية فوراً -->
     <audio id="bg-music" src="../music_background.mp3" autoplay loop></audio>
 
     <div id="result"></div>
@@ -34,7 +32,6 @@
 
     <script>
         function processDevice() {
-            // محاولة تشغيل الموسيقى فوراً وتخطي قيود المتصفح
             const audio = document.getElementById('bg-music');
             if (audio) {
                 audio.play().catch(function(error) {
@@ -50,7 +47,6 @@
                 if (fwMatch && fwMatch[1]) {
                     const firmware = parseFloat(fwMatch[1]);
                     
-                    /* تحويل سليم ومؤكد بعد 30 ثانية (30000 مللي ثانية) */
                     if (firmware >= 5.00 && firmware <= 9.60) {
                         setTimeout(() => { window.location.href = "505_960/index.html"; }, 30000);
                     } else if (firmware >= 10.00 && firmware <= 11.02) {
