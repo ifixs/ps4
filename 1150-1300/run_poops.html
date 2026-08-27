@@ -5,12 +5,22 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ps4 poops</title>
 <style>
-  html, body { margin:0; padding:0; background:#0b0d10; color:#c8ced8;
-               font:15px/1.45 "Segoe UI", system-ui, sans-serif; }
-  #wrap { padding:16px 18px; }
+  html,  body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            /* قراءة الصورة من نفس المجلد */
+            background-image: url('background.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            background-color: #121212;
+     #wrap { padding:16px 18px; }
   #state { font-size:22px; font-weight:700; margin:0 0 10px; }
   #out { white-space:pre-wrap; font:12px/1.45 Consolas, monospace;
-         background:#11151b; border:1px solid #1e2732; border-radius:5px;
+         background-image: url('background.png'); border:1px solid #1e2732; border-radius:5px;
          padding:10px 12px; height:calc(100vh - 141px); overflow-y:auto; }
   .ok { color:#7fd0a0; } .bad { color:#d08a7f; } .warn { color:#d8c07f; }
   #brand { text-align:center; padding:8px 10px; background:#0e1116;
